@@ -1,5 +1,7 @@
 package com.travel.staff.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -41,4 +43,19 @@ public class RegistrationService {
     }
     
     // Add other methods as needed for user management, retrieval, etc.
+    
+   public List<Staff> getAllStaff(){
+	   
+	   
+	   
+	   return staffRepository.findAll();
+   }  
+
+public List<Customer> getAllCustomers(){
+	   
+	   
+	   
+	   return customerRepository.findAll();
+   }  
+
 }

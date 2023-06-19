@@ -92,5 +92,9 @@
             </div>
         </form:form>
     </div>
+    <div>
+        <a href="/" class="login-btn">HOME</a>
+      
+    </div>
 </body>
 </html>

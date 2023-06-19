@@ -1,14 +1,13 @@
 package com.travel.staff.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.travel.staff.entity.Customer;
 import com.travel.staff.entity.Staff;
@@ -17,6 +16,7 @@ import com.travel.staff.entity.User;
 import com.travel.staff.repository.CustomerRepository;
 import com.travel.staff.repository.StaffRepository;
 import com.travel.staff.repository.UserRepository;
+import com.travel.staff.service.RegistrationService;
 
 @Controller
 
@@ -30,6 +30,9 @@ public class RegistrationStaffController {
     
     @Autowired
     private CustomerRepository customerRepository;
+    
+    @Autowired
+    private RegistrationService registrationService;
     
     @GetMapping("/staff")
     public String showStaffRegistrationForm(Model model) {
@@ -49,7 +52,7 @@ public class RegistrationStaffController {
     public String registerStaff(@ModelAttribute("staff") Staff staff) {
         // Add logic to display the staff registration form
     	System.out.println(staff.toString());
-    	staff.setStatus(Status.ACTIVATED);
+    	staff.setStatus(Status.Activated);
     	 staffRepository.save(staff);
     	 
     	 User user = new User();
@@ -64,32 +67,22 @@ public class RegistrationStaffController {
     }
     
    
-    
-    @GetMapping("/customer")
-    public String showCustomerRegistrationForm(Model model) {
-        // Add logic to display the customer registration form
-    	Customer customer = new Customer();
-    	model.addAttribute("customer", customer);
-        return "customer-registration";
-    }
-    
-    @PostMapping("/add-customer")
-    public String registerCustomer(@ModelAttribute("customer") Customer customer) {
-        // Add logic to save the customer registration details to the database
-    	 User user = new User();
-    	 user.setUsername(customer.getUsername());
-    	 user.setPassword(customer.getPassword());
-    	 user.setEnabled(true);
-    	 customer.setStatus(Status.ACTIVATED);
-        customerRepository.save(customer);
-        userRepository.save(user);
-       
-        return "redirect:/success";
-    }
-    
+  
     @GetMapping("/success")
     public String showRegistrationSuccessPage() {
         // Add logic to display the registration success page
         return "registration-success";
     }
+    
+    @GetMapping("/show-all-stsff")
+    public String showAllStaff(Model model) {
+       
+    	
+    	List<Staff> allStaff = registrationService.getAllStaff();
+    	model.addAttribute("allStaff", allStaff);
+    	System.out.println(allStaff.toString());
+        return "show-all-stsff";
+    }
+    
+   
 }
