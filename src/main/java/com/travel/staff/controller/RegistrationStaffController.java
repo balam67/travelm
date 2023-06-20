@@ -1,6 +1,7 @@
 package com.travel.staff.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -8,15 +9,15 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
-import com.travel.staff.entity.Customer;
 import com.travel.staff.entity.Staff;
 import com.travel.staff.entity.Status;
 import com.travel.staff.entity.User;
 import com.travel.staff.repository.CustomerRepository;
 import com.travel.staff.repository.StaffRepository;
 import com.travel.staff.repository.UserRepository;
-import com.travel.staff.service.RegistrationService;
+import com.travel.staff.service.RegistrationStaffService;
 
 @Controller
 
@@ -28,11 +29,10 @@ public class RegistrationStaffController {
     @Autowired
     private StaffRepository staffRepository;
     
-    @Autowired
-    private CustomerRepository customerRepository;
+    
     
     @Autowired
-    private RegistrationService registrationService;
+    private RegistrationStaffService registrationService;
     
     @GetMapping("/staff")
     public String showStaffRegistrationForm(Model model) {
@@ -74,15 +74,45 @@ public class RegistrationStaffController {
         return "registration-success";
     }
     
-    @GetMapping("/show-all-stsff")
+    @GetMapping("/show-all-staff")
     public String showAllStaff(Model model) {
        
     	
     	List<Staff> allStaff = registrationService.getAllStaff();
     	model.addAttribute("allStaff", allStaff);
     	System.out.println(allStaff.toString());
-        return "show-all-stsff";
+        return "show-all-staff";
     }
     
-   
+    @GetMapping("/updateStaff")
+    public String showUpdateStaffForm(@RequestParam("id") Long id, Model model) {
+      
+    	Optional<Staff> staffOptional = registrationService.findById(id);
+    	
+    	
+    	if (staffOptional.isPresent()) {
+    	    // Object is present
+    	    Staff staff = staffOptional.get();
+    	    // Do something with the staff object
+    	    model.addAttribute("staff", staff);
+            return "update-staff-form";
+    	} else {
+    	    // Object is not present
+    	    // Handle the case when the staff object is not found
+    		return "staff-not-found";
+    	}
+        
+    }
+
+    @PostMapping("/updateStaff")
+    public String updateStaff(@ModelAttribute("staff") Staff staff) {
+    	System.out.println(staff.toString());
+    	staff.setStatus(Status.Activated);
+    	registrationService.updateStaff(staff);
+        return "redirect:/show-all-staff";
+    }
 }
+
+
+
+

@@ -1,6 +1,7 @@
 package com.travel.staff.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -8,14 +9,17 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.travel.staff.entity.Customer;
+import com.travel.staff.entity.Staff;
 import com.travel.staff.entity.Status;
 import com.travel.staff.entity.User;
 import com.travel.staff.repository.CustomerRepository;
 import com.travel.staff.repository.StaffRepository;
 import com.travel.staff.repository.UserRepository;
-import com.travel.staff.service.RegistrationService;
+import com.travel.staff.service.RegistrationCustomerService;
+
 
 @Controller
 public class RegistrationCustomerController {
@@ -28,7 +32,7 @@ public class RegistrationCustomerController {
 	    private CustomerRepository customerRepository;
 	    
 	    @Autowired
-	    private RegistrationService registrationService;
+	    private RegistrationCustomerService registrationService;
 	
 	  
     @GetMapping("/customer")
@@ -62,5 +66,33 @@ public class RegistrationCustomerController {
     	model.addAttribute("allCustomers", allCustomers);
     	
         return "show-all-customers";
+    }
+    
+    @GetMapping("/updateCustomer")
+    public String showUpdateCustomerForm(@RequestParam("id") Long id, Model model) {
+      
+    	Optional<Customer> customerOptional = registrationService.findById(id);
+    	
+    	
+    	if (customerOptional.isPresent()) {
+    	    // Object is present
+    		Customer customer = customerOptional.get();
+    	    // Do something with the staff object
+    	    model.addAttribute("customer", customer);
+            return "update-customer-form";
+    	} else {
+    	    // Object is not present
+    	    // Handle the case when the staff object is not found
+    		return "customer-not-found";
+    	}
+        
+    }
+
+    @PostMapping("/updateCustomer")
+    public String updateCustomer(@ModelAttribute("staff") Customer customer) {
+    	System.out.println(customer.toString());
+    	customer.setStatus(Status.Activated);
+    	registrationService.updateCustomer(customer);
+        return "redirect:/show-all-customers";
     }
 }

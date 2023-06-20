@@ -1,4 +1,3 @@
-
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -79,7 +78,7 @@
             <th>Address</th>
             <th>Actions</th>
         </tr>
-        <c:forEach var="customer" items="${allCustomers}" varStatus="loop">
+        <c:forEach var="staff" items="${allStaff}" varStatus="loop">
             <c:set var="rowColor" value="${loop.index % 5}" />
             <tr class="<c:choose>
                            <c:when test="${rowColor == 0}">red-bg</c:when>
@@ -88,36 +87,40 @@
                            <c:when test="${rowColor == 3}">green-bg</c:when>
                            <c:otherwise>yellow-bg</c:otherwise>
                        </c:choose>">
-                <td>${customer.getId()}</td> 
-                <td>${customer.getEmail()}</td>
-                <td>${customer.getUsername()}</td>
-                <td>${customer.getFirstName()}</td>
-                <td>${customer.getLastName()}</td>
-                <td>${customer.getPhoneNo()}</td>
-                <td>${customer.getAddress()}</td>
-                <td>
-                    <c:if test="${customer.getStatus() == 'Activated'}">
-                        <a href="/deactivateStaff?id=${customer.getId()}" class="red-button">Deactivate</a>
+                <td>${staff.getId()}</td>
+                <td>${staff.getEmail()}</td>
+                <td>${staff.getUsername()}</td>
+                <td>${staff.getFirstName()}</td>
+                <td>${staff.getLastName()}</td>
+                <td>${staff.getPhoneNo()}</td>
+                <td>${staff.getAddress()}</td>
+                
+               
+        
+                
+                
+                
+                
+                
+              <td>
+                    <c:if test="${staff.getStatus() == 'Activated'}">
+                        <a href="/deactivateStaff?id=${staff.getId()}" class="red-button">Deactivate</a>
                     </c:if>
-                    <c:if test="${customer.getStatus() == 'DeActivated'}">
-                        <a href="/activateStaff?id=${customer.getId()}" class="green-button">Activate</a>
+                    <c:if test="${staff.getStatus() == 'DeActivated'}">
+                        <a href="/activateStaff?id=${staff.getId()}" class="green-button">Activate</a>
                     </c:if>
-                    <a href="/updateCustomer?id=${customer.getId()}" class="blue-button">Update</a>
-                    <a href="/deleteCustomer?id=${customer.getId()}" class="pink-button">Delete</a>
-                </td>
+                    <a href="/updateStaff?id=${staff.getId()}" class="blue-button">Update</a>
+                    <a href="/deleteStaff?id=${staff.getId()}" class="pink-button">Delete</a>
+                </td> 
             </tr>
         </c:forEach>
     </table>
+    
       <div>
         <a href="/" class="login-btn">HOME</a>
       
     </div>
 </body>
 </html>
-
-
-
-
-
 
 

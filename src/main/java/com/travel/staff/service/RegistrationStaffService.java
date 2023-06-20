@@ -1,6 +1,7 @@
 package com.travel.staff.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,7 +14,7 @@ import com.travel.staff.repository.StaffRepository;
 import com.travel.staff.repository.UserRepository;
 
 @Service
-public class RegistrationService {
+public class RegistrationStaffService {
     
     @Autowired
     private UserRepository userRepository;
@@ -21,9 +22,7 @@ public class RegistrationService {
     @Autowired
     private StaffRepository staffRepository;
     
-    @Autowired
-    private CustomerRepository customerRepository;
-    
+   
     public void registerStaff(Staff staff) {
         // Save staff to the staff table
         staffRepository.save(staff);
@@ -33,14 +32,10 @@ public class RegistrationService {
       //  userRepository.save(user);
     }
     
-    public void registerCustomer(Customer customer) {
-        // Save customer to the customer table
-        customerRepository.save(customer);
-        
+   
         // Create user for customer and save to the user table
        // User user = new User(customer.getUsername(), customer.getPassword(), "ROLE_CUSTOMER");
        // userRepository.save(user);
-    }
     
     // Add other methods as needed for user management, retrieval, etc.
     
@@ -51,11 +46,16 @@ public class RegistrationService {
 	   return staffRepository.findAll();
    }  
 
-public List<Customer> getAllCustomers(){
-	   
-	   
-	   
-	   return customerRepository.findAll();
-   }  
+  
+   public void updateStaff(Staff staff) {
+       staffRepository.save(staff);
+   }
+
+   public Optional<Staff> findById(Long id) {
+       
+	return staffRepository.findById(id);
+   }
+
+
 
 }

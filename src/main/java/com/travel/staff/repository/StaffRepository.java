@@ -7,5 +7,6 @@ import com.travel.staff.entity.Staff;
 
 @Repository
 public interface StaffRepository extends JpaRepository<Staff, Long> {
-    // Add custom query methods if needed
+
+	
 }

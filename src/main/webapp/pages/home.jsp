@@ -98,7 +98,7 @@
                 <a href="/staff" style="background-color: #ff9800;">STAFF REGISTRATION</a>
                 <a href="/customer" style="background-color: #4caf50;">CUSTOMER REGISTRATION</a>
                 <a href="/show-all-customers" style="background-color: #2196f3;">LIST CUSTOMERS</a>
-                <a href="/show-all-stsff" style="background-color: #f44336;">LIST STAFF</a>
+                <a href="/show-all-staff" style="background-color: #f44336;">LIST STAFF</a>
                 <a href="/show-all-customers" style="background-color: #9c27b0;">ADD BUSES</a>
                 <a href="/controller/method5" style="background-color: #c2185b;">VIEW BUSES</a>
                 <a href="/controller/method5" style="background-color: #e91e63;">BOOK BUS TICKETS</a>
