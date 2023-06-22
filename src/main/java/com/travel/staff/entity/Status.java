@@ -2,6 +2,6 @@ package com.travel.staff.entity;
 
 
 public enum Status {
-  DeActivated,
+  Deactivated,
     Activated
 }

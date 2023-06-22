@@ -106,7 +106,7 @@
                     <c:if test="${staff.getStatus() == 'Activated'}">
                         <a href="/deactivateStaff?id=${staff.getId()}" class="red-button">Deactivate</a>
                     </c:if>
-                    <c:if test="${staff.getStatus() == 'DeActivated'}">
+                    <c:if test="${staff.getStatus() == 'Deactivated'}">
                         <a href="/activateStaff?id=${staff.getId()}" class="green-button">Activate</a>
                     </c:if>
                     <a href="/updateStaff?id=${staff.getId()}" class="blue-button">Update</a>

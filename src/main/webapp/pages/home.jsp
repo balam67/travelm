@@ -103,7 +103,7 @@
                 <a href="/controller/method5" style="background-color: #c2185b;">VIEW BUSES</a>
                 <a href="/controller/method5" style="background-color: #e91e63;">BOOK BUS TICKETS</a>
                 <a href="/controller/method5" style="background-color: #4CAF50;">VIEW BUS TICKETS</a>
-                <a href="/controller/method5" style="background-color: #1976d2;">Box 5</a>
+                <a href="/bus-journey/show_bus_journeys_homepage" style="background-color: #1976d2;">BUS JOURNEY</a>
             </div>
         </div>
         <a href="/controller/login" class="login-btn">Login</a>

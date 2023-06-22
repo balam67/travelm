@@ -4,17 +4,23 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.travel.staff.entity.Staff;
 import com.travel.staff.entity.Status;
 import com.travel.staff.entity.User;
-import com.travel.staff.repository.CustomerRepository;
 import com.travel.staff.repository.StaffRepository;
 import com.travel.staff.repository.UserRepository;
 import com.travel.staff.service.RegistrationStaffService;
@@ -111,6 +117,53 @@ public class RegistrationStaffController {
     	registrationService.updateStaff(staff);
         return "redirect:/show-all-staff";
     }
+    
+    
+    
+    @GetMapping(value = "/deleteStaff")
+    public String showIndexPage(@RequestParam("id") Long staffId) {
+        // Add logic to display the staff registration form
+    	return deleteStaff(staffId);
+    }
+    
+ // DELETE /staff/deleteStaff?id={id}
+    @RequestMapping(value = "/deleteStaff")
+    @ResponseBody
+    public String  deleteStaff(@RequestParam("id") Long staffId) {
+       
+        	registrationService.deleteStaffById(staffId);
+        	return "redirect:/show-all-staff";
+           
+    }
+    
+    // GET /staff/deactivate?id={id}
+    @GetMapping("/deactivateStaff")
+    public String deactivateStaff(@RequestParam("id") Long staffId) throws NotFoundException {
+    	registrationService.deactivateStaff(staffId);
+        return "redirect:/show-all-staff"; // Redirect to a staff list page or any other appropriate page
+    }
+    
+    
+    
+    // GET /staff/activate?id={id}
+    @GetMapping("/activateStaff")
+    public String activateStaff(@RequestParam("id") Long staffId) throws NotFoundException {
+    	registrationService.activateStaff(staffId);
+        return "redirect:/show-all-staff";  // Redirect to a staff list page or any other appropriate page
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 }
 
 
