@@ -24,8 +24,8 @@ public class BusJourney {
     @Column(name = "bus_number", nullable = false)
     private String busNumber;
     
-    @Column(nullable = false)
-    private double fare;
+  // @Column(name = "fare", nullable = false)
+    private Double fee;
     
     @Enumerated(EnumType.STRING)
     @Column(name = "booking_status", nullable = false)
@@ -86,14 +86,7 @@ public class BusJourney {
 		this.busNumber = busNumber;
 	}
 
-	public double getFare() {
-		return fare;
-	}
-
-	public void setFare(double fare) {
-		this.fare = fare;
-	}
-
+	
 	public BookingStatus getBookingStatus() {
 		return bookingStatus;
 	}
@@ -118,13 +111,21 @@ public class BusJourney {
 		this.activationStatus = activationStatus;
 	}
 
+	public Double getFee() {
+		return fee;
+	}
+
+	public void setFee(Double fee) {
+		this.fee = fee;
+	}
+
 	@Override
 	public String toString() {
 		return "BusJourney [id=" + id + ", departureCity=" + departureCity + ", arrivalCity=" + arrivalCity
 				+ ", departureTime=" + departureTime + ", arrivalTime=" + arrivalTime + ", busNumber=" + busNumber
-				+ ", fare=" + fare + ", bookingStatus=" + bookingStatus + ", customerId=" + customerId
+				+ ", fee=" + fee + ", bookingStatus=" + bookingStatus + ", customerId=" + customerId
 				+ ", activationStatus=" + activationStatus + "]";
 	}
-    
+
     // Constructors, getters, and setters
 }

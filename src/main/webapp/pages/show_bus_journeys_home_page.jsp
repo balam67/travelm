@@ -103,8 +103,8 @@
         <a class="box box-3" href="/bus-journey/search_bus_journey">
             SHOW AVAILABLE BUSES 
         </a>
-        <a class="box box-4" href="/bus-journey/">
-            Box 4
+        <a class="box box-4" href="/bus-journey/search">
+            SEARCH
         </a>
         <a class="box box-5" href="/bus-journey/">
             Box 5

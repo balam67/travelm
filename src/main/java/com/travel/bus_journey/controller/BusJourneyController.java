@@ -9,9 +9,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import com.travel.bus_journey.entity.BusJourney;
+import com.travel.bus_journey.entity.BusSearchForm;
 import com.travel.bus_journey.service.BusJourneyService;
 
 @Controller
@@ -128,6 +132,34 @@ public class BusJourneyController {
         return "search_bus_journey_status";
     }
     
+    
+    @GetMapping("/search")
+    public String searchJourneys(Model model) {
+    	
+    	
+    	
+    	 model.addAttribute("busSearchForm", new BusSearchForm());
+    	
+        return "searchBus";
+    }
+    
+   
+    // ...
+    
+    
+    
+
+    @RequestMapping(value = "/search", method = RequestMethod.POST)
+    public String searchBuses(@ModelAttribute("busSearchForm") BusSearchForm busSearchForm, Model model) {
+    	
+    	
+    	List<BusJourney> searchBuses = busJourneyService.searchBuses(busSearchForm);
+    	System.out.println("Final Data "+ searchBuses.toString());
+        model.addAttribute("searchBuses", searchBuses);
+
+        return "busResults";
+    }
+
     
     
 }

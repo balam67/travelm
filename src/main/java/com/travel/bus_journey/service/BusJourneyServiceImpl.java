@@ -1,6 +1,17 @@
 package com.travel.bus_journey.service;
 
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
+
+import javax.persistence.EntityManager;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
+import java.util.ArrayList;
+import java.util.List;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -10,20 +21,29 @@ import org.springframework.data.domain.ExampleMatcher;
 import com.travel.bus_journey.entity.ActivationStatus;
 import com.travel.bus_journey.entity.BookingStatus;
 import com.travel.bus_journey.entity.BusJourney;
+import com.travel.bus_journey.entity.BusSearchForm;
 import com.travel.bus_journey.repository.BusJourneyRepository;
 
 @Service
 public class BusJourneyServiceImpl implements BusJourneyService {
 
+	//@Autowired
+    //private final BusJourneyRepository busJourneyRepository;
+
+	/*
+	 * @Autowired public BusJourneyServiceImpl(BusJourneyRepository
+	 * busJourneyRepository) { this.busJourneyRepository = busJourneyRepository; }
+	 * 
+	 * 
+	 */
+	
 	@Autowired
-    private final BusJourneyRepository busJourneyRepository;
-
+	private BusJourneyRepository busJourneyRepository;
     @Autowired
-    public BusJourneyServiceImpl(BusJourneyRepository busJourneyRepository) {
-        this.busJourneyRepository = busJourneyRepository;
-    }
+	 private  EntityManager entityManager;
 
-    @Override
+	
+	@Override
     public BusJourney saveBusJourney(BusJourney busJourney) {
     	
     	busJourney.setActivationStatus(ActivationStatus.ACTIVE);
@@ -117,6 +137,86 @@ public class BusJourneyServiceImpl implements BusJourneyService {
 			// TODO Auto-generated method stub
 			return busJourneyRepository.searchByCities(departureCity, arrivalCity);
 		}
+		
+		
+		
+		
+		
+		  @Override 
+		  public List<BusJourney> searchBuses(BusSearchForm busSearchForm) {
+		  
+		  System.out.println("Input Data in service class   "+busSearchForm.toString()) ; 
+		  BusJourney bus = new BusJourney();
+		  
+		  if (null != busSearchForm.getArrivalCity() &&
+		  !"".equals(busSearchForm.getArrivalCity())) {
+		  bus.setArrivalCity(busSearchForm.getArrivalCity()); }
+		  
+		  if (null != busSearchForm.getBusNumber() &&
+		  !"".equals(busSearchForm.getBusNumber())) {
+		  bus.setBusNumber(busSearchForm.getBusNumber()); }
+		  
+		  if (null != busSearchForm.getDepartureCity() &&
+		  !"".equals(busSearchForm.getDepartureCity())) {
+		  bus.setDepartureCity(busSearchForm.getDepartureCity()); }
+		  
+		  
+		  if (null != busSearchForm.getFee() && !"".equals(busSearchForm.getFee())) {
+				  bus.setFee(busSearchForm.getFee()); 
+				  
+		  
+		  }
+		  
+		  Example<BusJourney> example = Example.of(bus);
+
+			List<BusJourney> findAll = busJourneyRepository.findAll(example);
+
+			findAll.forEach(System.out::println);
+
+			return findAll;
+		  }
+		  
+		 
+		    
+		
+
+		//@Override
+		public List<BusJourney> searchBuses1(BusSearchForm busSearchForm) {
+			
+			
+			
+			CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+		    CriteriaQuery<BusJourney> criteriaQuery = criteriaBuilder.createQuery(BusJourney.class);
+		    Root<BusJourney> root = criteriaQuery.from(BusJourney.class);
+
+		    List<Predicate> predicates = new ArrayList<>();
+
+		    if (null != busSearchForm.getArrivalCity() && !"".equals(busSearchForm.getArrivalCity())) {
+		        predicates.add(criteriaBuilder.equal(root.get("arrivalCity"), busSearchForm.getArrivalCity()));
+		    }
+
+		    if (null != busSearchForm.getBusNumber() && !"".equals(busSearchForm.getBusNumber())) {
+		        predicates.add(criteriaBuilder.equal(root.get("busNumber"), busSearchForm.getBusNumber()));
+		    }
+
+		    if (null != busSearchForm.getDepartureCity() && !"".equals(busSearchForm.getDepartureCity())) {
+		        predicates.add(criteriaBuilder.equal(root.get("departureCity"), busSearchForm.getDepartureCity()));
+		    }
+
+		    criteriaQuery.select(root)
+		            .where(predicates.toArray(new Predicate[0]));
+
+		    return entityManager.createQuery(criteriaQuery).getResultList();
+			
+	
+			
+			
+		}
+ 
+		    
+	
+			
+			
 }
 		
 

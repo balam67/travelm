@@ -3,6 +3,7 @@ package com.travel.bus_journey.service;
 import java.util.List;
 
 import com.travel.bus_journey.entity.BusJourney;
+import com.travel.bus_journey.entity.BusSearchForm;
 
 public interface BusJourneyService {
     BusJourney saveBusJourney(BusJourney busJourney);
@@ -11,6 +12,7 @@ public interface BusJourneyService {
 
     void deleteBusJourney(Long id);
 
+    public List<BusJourney> searchBuses(BusSearchForm busSearchForm);
     List<BusJourney> getAllBusJourneys();
 
     BusJourney getBusJourneyByBusNumber(String busNumber);
