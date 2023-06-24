@@ -15,6 +15,7 @@ public interface BusJourneyService {
     public List<BusJourney> searchBuses(BusSearchForm busSearchForm);
     List<BusJourney> getAllBusJourneys();
 
+    public List<BusJourney> findUnassignedBusJourneys() ;
     BusJourney getBusJourneyByBusNumber(String busNumber);
     List<BusJourney> searchByCities(String departureCity, String arrivalCity);
      BusJourney getBusBusId(Long id);

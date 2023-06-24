@@ -18,5 +18,9 @@ public interface BusJourneyRepository extends JpaRepository<BusJourney, Long> {
 	
 	  @Query("SELECT b FROM BusJourney b WHERE b.departureCity = :departureCity AND b.arrivalCity = :arrivalCity")
 	    List<BusJourney> searchByCities(@Param("departureCity") String departureCity, @Param("arrivalCity") String arrivalCity);
+	  
+	  
+	  @Query("SELECT b FROM BusJourney b WHERE b.bookingStatus = 'AVAILABLE'")
+       List<BusJourney> findUnassignedBusJourneys();
 
 }

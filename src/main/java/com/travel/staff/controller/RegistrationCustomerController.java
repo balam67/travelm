@@ -68,6 +68,16 @@ public class RegistrationCustomerController {
         return "show-all-customers";
     }
     
+    @GetMapping("/show-all-registered-customers")
+    public String showAllRegisteredCustomers(Model model) {
+       
+    	
+    List<Customer> allCustomers = registrationService.getAllCustomers();
+    	model.addAttribute("allCustomers", allCustomers);
+    	
+        return "show-all-registered-customers";
+    }
+    
     @GetMapping("/updateCustomer")
     public String showUpdateCustomerForm(@RequestParam("id") Long id, Model model) {
       

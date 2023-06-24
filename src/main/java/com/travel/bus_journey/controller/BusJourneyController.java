@@ -1,5 +1,6 @@
 package com.travel.bus_journey.controller;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -71,6 +72,43 @@ public class BusJourneyController {
         return "edit_bus_journey";
     }
     
+
+    @GetMapping("/bookTicket")
+    public String getUnassignedBusJourneys(@RequestParam("id") Long id) {
+    	System.out.println("Customer Id "+id);
+    	
+         List<BusJourney> findUnassignedBusJourneys = busJourneyService.findUnassignedBusJourneys();
+         System.out.println("List of AVAILABLE "+findUnassignedBusJourneys); 
+         
+         for (BusJourney busJourney : findUnassignedBusJourneys) {
+             System.out.println("Customer id " + busJourney.getBookingStatus());
+             
+             // Perform operations on each unassigned bus journey
+             if (busJourney.getBookingStatus().equals("AVAILABLE")) {
+                 busJourney.setCustomerId(1l);
+                 updateBusJourneyForTicket(busJourney);
+                 break; // Exit the loop after the condition is met
+             }
+         }
+
+         return "redirect:/bus-journey/search";
+         
+    }
+   
+    
+	/*
+	 * @GetMapping("/bookTicket") public String bookBusTicket(@RequestParam("id")
+	 * Long id, Model model) {
+	 * 
+	 * 
+	 * 
+	 * List<BusJourney> allBusJourneys = busJourneyService.getAllBusJourneys();
+	 * 
+	 * 
+	 * 
+	 * model.addAttribute("allBusJourneys", allBusJourneys); return "busResults"; }
+	 */
+    
     @GetMapping("/deactivateBus")
     public String showEditFormForBusActivationStatusToDeactivate(@RequestParam("id") Long id, Model model) {
         BusJourney busJourney = busJourneyService.getBusBusId(id);
@@ -89,6 +127,11 @@ public class BusJourneyController {
         
         model.addAttribute("busJourney", busJourney);
         return "redirect:/bus-journey/show_bus_journeys";
+    }
+    
+    public void updateBusJourneyForTicket( BusJourney busJourney) {
+        busJourneyService.updateBusJourney(busJourney);
+        
     }
 
     @PostMapping("/updateBus")
@@ -151,7 +194,23 @@ public class BusJourneyController {
 
     @RequestMapping(value = "/search", method = RequestMethod.POST)
     public String searchBuses(@ModelAttribute("busSearchForm") BusSearchForm busSearchForm, Model model) {
-    	
+    	LocalDate fromDate2 = busSearchForm.getFromDate(); 
+    	System.out.println(fromDate2);
+    	//String dateString = busSearchForm.getFromDate(); // Get the input date string
+		/*
+		 * DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd"); //
+		 * Specify the expected format LocalDate fromDate = LocalDate.parse(dateString,
+		 * formatter); // Convert the string to LocalDate form.setFromDate(fromDate); //
+		 * Set the converted LocalDate object back to the form attribute
+		 * 
+		 * String dateString = form.getFromDate(); // Get the input date string
+		 * DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd"); //
+		 * Specify the expected format LocalDate toDate = LocalDate.parse(dateString,
+		 * formatter); // Convert the string to LocalDate form.setFromDate(fromDate); //
+		 * Set the converted LocalDate object back to the form attribute
+		 */
+        
+        
     	
     	List<BusJourney> searchBuses = busJourneyService.searchBuses(busSearchForm);
     	System.out.println("Final Data "+ searchBuses.toString());

@@ -148,30 +148,49 @@ public class BusJourneyServiceImpl implements BusJourneyService {
 		  System.out.println("Input Data in service class   "+busSearchForm.toString()) ; 
 		  BusJourney bus = new BusJourney();
 		  
-		  if (null != busSearchForm.getArrivalCity() &&
-		  !"".equals(busSearchForm.getArrivalCity())) {
-		  bus.setArrivalCity(busSearchForm.getArrivalCity()); }
+		  if (null != busSearchForm.getArrivalCity() && !"".equals(busSearchForm.getArrivalCity())) {
+		       bus.setArrivalCity(busSearchForm.getArrivalCity());
+		       
+		  }
 		  
-		  if (null != busSearchForm.getBusNumber() &&
-		  !"".equals(busSearchForm.getBusNumber())) {
-		  bus.setBusNumber(busSearchForm.getBusNumber()); }
+		  if (null != busSearchForm.getBusNumber() && !"".equals(busSearchForm.getBusNumber())) {
+		       bus.setBusNumber(busSearchForm.getBusNumber());
 		  
-		  if (null != busSearchForm.getDepartureCity() &&
-		  !"".equals(busSearchForm.getDepartureCity())) {
-		  bus.setDepartureCity(busSearchForm.getDepartureCity()); }
+		  }
+		  
+		  if (null != busSearchForm.getDepartureCity() &&  !"".equals(busSearchForm.getDepartureCity())) {
+		       bus.setDepartureCity(busSearchForm.getDepartureCity()); 
+		  
+		  }
 		  
 		  
-		  if (null != busSearchForm.getFee() && !"".equals(busSearchForm.getFee())) {
-				  bus.setFee(busSearchForm.getFee()); 
+		  if (null != busSearchForm.getFromDate() && !"".equals(busSearchForm.getFromDate())) {
+				  bus.setFromDate(busSearchForm.getFromDate()); 
 				  
 		  
 		  }
+		  if (null != busSearchForm.getToDate() && !"".equals(busSearchForm.getToDate())) {
+			  bus.setToDate(busSearchForm.getToDate()); 
+			  
+	  
+	  }
+		  if (null != busSearchForm.getBookingStatus() && !"".equals(busSearchForm.getBookingStatus())) {
+			  bus.setBookingStatus(busSearchForm.getBookingStatus()); 
+			  
+	  
+	  }
+		  if (null != busSearchForm.getCustomerId() && !"".equals(busSearchForm.getCustomerId())) {
+			  bus.setCustomerId(busSearchForm.getCustomerId()); 
+			  
+	  
+	  }
 		  
 		  Example<BusJourney> example = Example.of(bus);
 
 			List<BusJourney> findAll = busJourneyRepository.findAll(example);
-
-			findAll.forEach(System.out::println);
+  
+			 System.out.println("Output Data in service class   "+findAll.toString()) ; 
+			//findAll.forEach(System.out::println);
 
 			return findAll;
 		  }
@@ -211,6 +230,12 @@ public class BusJourneyServiceImpl implements BusJourneyService {
 	
 			
 			
+		}
+
+		@Override
+		public List<BusJourney> findUnassignedBusJourneys() {
+			// TODO Auto-generated method stub
+			return busJourneyRepository.findUnassignedBusJourneys();
 		}
  
 		    

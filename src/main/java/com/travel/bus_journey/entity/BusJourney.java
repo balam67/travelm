@@ -1,5 +1,7 @@
 
 package com.travel.bus_journey.entity;
+import java.time.LocalDate;
+
 import javax.persistence.*;
 
 @Entity
@@ -16,10 +18,9 @@ public class BusJourney {
     private String arrivalCity;
     
     @Column(name = "departure_time", nullable = false)
-    private String departureTime;
-    
+    private LocalDate fromDate;
     @Column(name = "arrival_time", nullable = false)
-    private String arrivalTime;
+    private LocalDate toDate;
     
     @Column(name = "bus_number", nullable = false)
     private String busNumber;
@@ -62,20 +63,20 @@ public class BusJourney {
 		this.arrivalCity = arrivalCity;
 	}
 
-	public String getDepartureTime() {
-		return departureTime;
+	public LocalDate getFromDate() {
+		return fromDate;
 	}
 
-	public void setDepartureTime(String departureTime) {
-		this.departureTime = departureTime;
+	public void setFromDate(LocalDate fromDate) {
+		this.fromDate = fromDate;
 	}
 
-	public String getArrivalTime() {
-		return arrivalTime;
+	public LocalDate getToDate() {
+		return toDate;
 	}
 
-	public void setArrivalTime(String arrivalTime) {
-		this.arrivalTime = arrivalTime;
+	public void setToDate(LocalDate toDate) {
+		this.toDate = toDate;
 	}
 
 	public String getBusNumber() {
@@ -86,7 +87,14 @@ public class BusJourney {
 		this.busNumber = busNumber;
 	}
 
-	
+	public Double getFee() {
+		return fee;
+	}
+
+	public void setFee(Double fee) {
+		this.fee = fee;
+	}
+
 	public BookingStatus getBookingStatus() {
 		return bookingStatus;
 	}
@@ -111,21 +119,13 @@ public class BusJourney {
 		this.activationStatus = activationStatus;
 	}
 
-	public Double getFee() {
-		return fee;
-	}
-
-	public void setFee(Double fee) {
-		this.fee = fee;
-	}
-
 	@Override
 	public String toString() {
 		return "BusJourney [id=" + id + ", departureCity=" + departureCity + ", arrivalCity=" + arrivalCity
-				+ ", departureTime=" + departureTime + ", arrivalTime=" + arrivalTime + ", busNumber=" + busNumber
-				+ ", fee=" + fee + ", bookingStatus=" + bookingStatus + ", customerId=" + customerId
-				+ ", activationStatus=" + activationStatus + "]";
+				+ ", fromDate=" + fromDate + ", toDate=" + toDate + ", busNumber=" + busNumber + ", fee=" + fee
+				+ ", bookingStatus=" + bookingStatus + ", customerId=" + customerId + ", activationStatus="
+				+ activationStatus + "]";
 	}
 
-    // Constructors, getters, and setters
+	
 }
