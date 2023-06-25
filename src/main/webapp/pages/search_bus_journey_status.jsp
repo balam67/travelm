@@ -10,7 +10,7 @@
 <h1>your bus Ticket Booked sucessfully"</h1>
 
  <div>
-        <a href="show_bus_journeys_homepage" class="login-btn">BUS JOURNEY HOME</a>
+        <a href="/bus-journey/show_bus_journeys_homepage" class="login-btn">BUS JOURNEY HOME</a>
       
     </div>
 </body>

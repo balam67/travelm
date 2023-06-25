@@ -106,16 +106,7 @@
         <a class="box box-4" href="/bus-journey/search">
             SEARCH
         </a>
-        <a class="box box-5" href="/bus-journey/">
-            Box 5
-        </a>
-        <a class="box box-6" href="/bus-journey/">
-            Box 6
-        </a>
-        <a class="box box-7" href="/bus-journey/">
-            Box 7
-        </a>
-        
+    
     </div>
     
     

@@ -13,6 +13,7 @@ public class BusJourney {
     
     @Column(name = "departure_city", nullable = false)
     private String departureCity;
+    private String username;
     
     @Column(name = "arrival_city", nullable = false)
     private String arrivalCity;
@@ -119,13 +120,23 @@ public class BusJourney {
 		this.activationStatus = activationStatus;
 	}
 
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
 	@Override
 	public String toString() {
-		return "BusJourney [id=" + id + ", departureCity=" + departureCity + ", arrivalCity=" + arrivalCity
-				+ ", fromDate=" + fromDate + ", toDate=" + toDate + ", busNumber=" + busNumber + ", fee=" + fee
-				+ ", bookingStatus=" + bookingStatus + ", customerId=" + customerId + ", activationStatus="
+		return "BusJourney [id=" + id + ", departureCity=" + departureCity + ", username=" + username + ", arrivalCity="
+				+ arrivalCity + ", fromDate=" + fromDate + ", toDate=" + toDate + ", busNumber=" + busNumber + ", fee="
+				+ fee + ", bookingStatus=" + bookingStatus + ", customerId=" + customerId + ", activationStatus="
 				+ activationStatus + "]";
 	}
+
+	
 
 	
 }

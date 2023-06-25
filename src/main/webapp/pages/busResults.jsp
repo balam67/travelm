@@ -104,7 +104,7 @@
                             <a href="#" class="red-button">Not Available</a>
                         </c:when>
                         <c:otherwise>
-                            <a href="/show-all-registered-customers" class="green-button">Available</a>
+                            <a href="/bus-journey/bookTicket?id=${bus.id}" class="green-button">Available</a>
                         </c:otherwise>
                     </c:choose>
                 </td>

@@ -57,7 +57,7 @@
 <body>
     <div class="container">
         <h1>Staff Registration</h1>
-        <form:form  action="/add-staff" modelAttribute="staff" method="post">
+        <form:form  action="staff/add-staff" modelAttribute="staff" method="post">
             <div class="form-group">
                 <label>Email:</label>
                 <form:input path="email" />

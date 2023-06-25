@@ -104,13 +104,13 @@
                 
               <td>
                     <c:if test="${staff.getStatus() == 'Activated'}">
-                        <a href="/deactivateStaff?id=${staff.getId()}" class="red-button">Deactivate</a>
+                        <a href="staff/deactivateStaff?id=${staff.getId()}" class="red-button">Deactivate</a>
                     </c:if>
                     <c:if test="${staff.getStatus() == 'Deactivated'}">
-                        <a href="/activateStaff?id=${staff.getId()}" class="green-button">Activate</a>
+                        <a href="staff/activateStaff?id=${staff.getId()}" class="green-button">Activate</a>
                     </c:if>
-                    <a href="/updateStaff?id=${staff.getId()}" class="blue-button">Update</a>
-                    <a href="/deleteStaff?id=${staff.getId()}" class="pink-button">Delete</a>
+                    <a href="staff/updateStaff?id=${staff.getId()}" class="blue-button">Update</a>
+                    <a href="staff/deleteStaff?id=${staff.getId()}" class="pink-button">Delete</a>
                 </td> 
             </tr>
         </c:forEach>

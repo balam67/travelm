@@ -64,7 +64,7 @@
     </div>
     
      <div>
-        <a href="show_bus_journeys_homepage" class="login-btn">HOME</a>
+        <a href="/bus-journey/show_bus_journeys_homepage" class="login-btn">HOME</a>
       
     </div>
 </body>

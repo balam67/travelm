@@ -65,7 +65,7 @@
 <body>
     <div class="container">
         <h1>Update Staff</h1>
-        <form:form method="post" action="/updateCustomer" modelAttribute="customer">
+        <form:form method="post" action="customer/updateCustomer" modelAttribute="customer">
             
             
             <div class="form-group">

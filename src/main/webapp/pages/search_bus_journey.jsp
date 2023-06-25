@@ -72,14 +72,14 @@
                 <label class="form-label" for="arrivalCity">Arrival City:</label>
                 <input type="text" id="arrivalCity" name="arrivalCity" class="form-control" required>
             </div>
-           <!--  <div class="form-group">
-                <label class="form-label" for="departureTime">Departure Time:</label>
-                <input type="text" id="departureTime" name="departureTime" class="form-control" required>
+            <div class="form-group">
+                <label class="form-label" for="fromDate">Departure Time:</label>
+                <input type="text" id="fromDate" name="fromDate" class="form-control" required>
             </div>
             <div class="form-group">
-                <label class="form-label" for="arrivalTime">Arrival Time:</label>
-                <input type="text" id="arrivalTime" name="arrivalTime" class="form-control" required>
-            </div> -->
+                <label class="form-label" for="toDate">Arrival Time:</label>
+                <input type="text" id="toDate" name="toDate" class="form-control" required>
+            </div>
             <div class="btn-container">
                 <button type="submit" class="btn">Search</button>
             </div>

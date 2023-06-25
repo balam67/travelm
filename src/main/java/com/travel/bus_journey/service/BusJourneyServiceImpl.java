@@ -43,6 +43,14 @@ public class BusJourneyServiceImpl implements BusJourneyService {
 	 private  EntityManager entityManager;
 
 	
+    
+    @Override
+    public BusJourney saveBusJourneyByCustomer(BusJourney busJourney) {
+    	
+    	busJourney.setActivationStatus(ActivationStatus.ACTIVE);
+    	busJourney.setBookingStatus(BookingStatus.BOOKED);
+        return busJourneyRepository.save(busJourney);
+    }
 	@Override
     public BusJourney saveBusJourney(BusJourney busJourney) {
     	

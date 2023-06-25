@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,26 +13,43 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import java.util.List;
-import java.util.stream.Collectors;
 
 import com.travel.bus_journey.entity.BusJourney;
 import com.travel.bus_journey.entity.BusSearchForm;
 import com.travel.bus_journey.service.BusJourneyService;
-
+import org.springframework.security.core.Authentication;
 @Controller
 @RequestMapping("/bus-journey")
-public class BusJourneyController {
+public class BusJourneyController implements org.springframework.boot.web.servlet.error.ErrorController {
 
     private final BusJourneyService busJourneyService;
+   
 
     @Autowired
     public BusJourneyController(BusJourneyService busJourneyService) {
         this.busJourneyService = busJourneyService;
     }
 
+    @RequestMapping("/error")
+    public String handleError() {
+        // Handle the error logic here
+        // You can display a custom error page or redirect to a specific URL
+        return "error";
+    }
+
+    public String getErrorPath() {
+        return "/error";
+    }
+   
+
+    
     @GetMapping("/show_bus_journeys")
     public String getAllBusJourneys(Model model) {
+    	
+    	
+        // You can now use the 'username' variable as the logged-in user's name
+        
+     
         model.addAttribute("busJourneys", busJourneyService.getAllBusJourneys());
         return "show_all_bus_journeys";
     }
@@ -75,25 +93,26 @@ public class BusJourneyController {
 
     @GetMapping("/bookTicket")
     public String getUnassignedBusJourneys(@RequestParam("id") Long id) {
-    	System.out.println("Customer Id "+id);
     	
-         List<BusJourney> findUnassignedBusJourneys = busJourneyService.findUnassignedBusJourneys();
-         System.out.println("List of AVAILABLE "+findUnassignedBusJourneys); 
-         
-         for (BusJourney busJourney : findUnassignedBusJourneys) {
-             System.out.println("Customer id " + busJourney.getBookingStatus());
-             
-             // Perform operations on each unassigned bus journey
-             if (busJourney.getBookingStatus().equals("AVAILABLE")) {
-                 busJourney.setCustomerId(1l);
-                 updateBusJourneyForTicket(busJourney);
-                 break; // Exit the loop after the condition is met
-             }
-         }
-
+    	Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+       String  username = authentication.getName();
+       
+    	System.out.println("Bus Id:  "+id);
+    	   System.out.println("Logged-in user: " + username);
+    	
+       BusJourney busBusIdBus = busJourneyService.getBusBusId(id);
+       
+       busBusIdBus.setUsername(username);
+       busBusIdBus.setId(id);
+       System.out.println("Updated Details "+busBusIdBus.toString());
+       busJourneyService.saveBusJourneyByCustomer(busBusIdBus);
+      
          return "redirect:/bus-journey/search";
          
     }
+    
+    
+    
    
     
 	/*

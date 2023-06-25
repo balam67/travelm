@@ -86,12 +86,12 @@
                 <input type="text" id="arrivalCity" name="arrivalCity" required>
             </div>
             <div class="form-group">
-                <label for="departureTime">Departure Time:</label>
-                <input type="text" id="departureTime" name="departureTime" required>
+                <label for="fromDate">Departure Time:</label>
+                <input type="text" id="fromDate" name="fromDate" required>
             </div>
             <div class="form-group">
-                <label for="arrivalTime">Arrival Time:</label>
-                <input type="text" id="arrivalTime" name="arrivalTime" required>
+                <label for="toDate">Arrival Time:</label>
+                <input type="text" id="toDate" name="toDate" required>
             </div>
             <div class="form-group">
                 <label for="fare">Fare:</label>
@@ -114,7 +114,7 @@
     </div>
     
      <div>
-        <a href="show_bus_journeys_homepage" class="login-btn">BUS JOURNEY HOME</a>
+        <a href="/bus-journey/show_bus_journeys_homepage" class="login-btn">BUS JOURNEY HOME</a>
       
     </div>
 </body>

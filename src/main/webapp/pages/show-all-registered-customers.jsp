@@ -104,7 +104,7 @@
         </c:forEach>
     </table>
       <div>
-        <a href="/show_bus_journeys" class="login-btn">show_bus_journeys</a>
+        <a href="/bus-journey/show_bus_journeys" class="login-btn">show_bus_journeys</a>
       
     </div>
 </body>

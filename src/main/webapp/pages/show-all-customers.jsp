@@ -97,13 +97,13 @@
                 <td>${customer.getAddress()}</td>
                 <td>
                     <c:if test="${customer.getStatus() == 'Activated'}">
-                        <a href="/deactivateStaff?id=${customer.getId()}" class="red-button">Deactivate</a>
+                        <a href="customer/deactivateCustomer?id=${customer.getId()}" class="red-button">Deactivate</a>
                     </c:if>
                     <c:if test="${customer.getStatus() == 'DeActivated'}">
-                        <a href="/activateStaff?id=${customer.getId()}" class="green-button">Activate</a>
+                        <a href="customer/activateCustomer?id=${customer.getId()}" class="green-button">Activate</a>
                     </c:if>
-                    <a href="/updateCustomer?id=${customer.getId()}" class="blue-button">Update</a>
-                    <a href="/deleteCustomer?id=${customer.getId()}" class="pink-button">Delete</a>
+                    <a href="customer/updateCustomer?id=${customer.getId()}" class="blue-button">Update</a>
+                    <a href="customer/deleteCustomer?id=${customer.getId()}" class="pink-button">Delete</a>
                 </td>
             </tr>
         </c:forEach>

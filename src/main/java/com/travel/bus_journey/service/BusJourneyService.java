@@ -19,6 +19,7 @@ public interface BusJourneyService {
     BusJourney getBusJourneyByBusNumber(String busNumber);
     List<BusJourney> searchByCities(String departureCity, String arrivalCity);
      BusJourney getBusBusId(Long id);
+     public BusJourney saveBusJourneyByCustomer(BusJourney busJourney);
      BusJourney updateBusJourneyActivationStatusToDeactivate(BusJourney busJourney);
      BusJourney updateBusJourneyActivationStatusToActivate(BusJourney busJourney);
      

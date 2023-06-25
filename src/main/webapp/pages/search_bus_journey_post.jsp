@@ -63,8 +63,8 @@
                 <tr>
                     <td>${busJourney.departureCity}</td>
                     <td>${busJourney.arrivalCity}</td>
-                    <td>${busJourney.departureTime}</td>
-                    <td>${busJourney.arrivalTime}</td>
+                    <td>${busJourney.fromDate}</td>
+                    <td>${busJourney.toDate}</td>
                     <td>${busJourney.busNumber}</td>
                     <td>${busJourney.fare}</td>
                     <td>${busJourney.bookingStatus}</td>

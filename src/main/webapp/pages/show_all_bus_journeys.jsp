@@ -60,8 +60,8 @@
                 <td>${busJourney.busNumber}</td>
                 <td>${busJourney.departureCity}</td>
                 <td>${busJourney.arrivalCity}</td>
-                <td>${busJourney.departureTime}</td>
-                <td>${busJourney.arrivalTime}</td>
+                <td>${busJourney.fromDate}</td>
+                <td>${busJourney.toDate}</td>
                 
                   <td>
                     <c:if test="${busJourney.getActivationStatus() == 'ACTIVE'}">
@@ -78,7 +78,7 @@
     </table>
     
      <div>
-        <a href="show_bus_journeys_homepage" class="login-btn">BUS JOURNEY HOME</a>
+        <a href="/bus-journey/show_bus_journeys_homepage" class="login-btn">BUS JOURNEY HOME</a>
       
     </div>
 </body>

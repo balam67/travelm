@@ -68,12 +68,12 @@
                 <input type="text" id="arrivalCity" name="arrivalCity" class="form-control" value="${busJourney.arrivalCity}" required>
             </div>
             <div class="form-group">
-                <label class="form-label" for="departureTime">Departure Time:</label>
-                <input type="text" id="departureTime" name="departureTime" class="form-control" value="${busJourney.departureTime}" required>
+                <label class="form-label" for="fromDate">Departure Time:</label>
+                <input type="text" id="fromDate" name="fromDate" class="form-control" value="${busJourney.departureTime}" required>
             </div>
             <div class="form-group">
-                <label class="form-label" for="arrivalTime">Arrival Time:</label>
-                <input type="text" id="arrivalTime" name="arrivalTime" class="form-control" value="${busJourney.arrivalTime}" required>
+                <label class="form-label" for="toDate">Arrival Time:</label>
+                <input type="text" id="toDate" name="toDate" class="form-control" value="${busJourney.arrivalTime}" required>
             </div>
             <div class="form-group">
                 <label class="form-label" for="busNumber">Bus Number:</label>
@@ -83,7 +83,7 @@
                 <label class="form-label" for="fare">Fare:</label>
                 <input type="text" id="fare" name="fare" class="form-control" value="${busJourney.fare}" required>
             </div>
-           <%--  <div class="form-group">
+            <div class="form-group">
                 <label class="form-label" for="bookingStatus">Booking Status:</label>
                 <select id="bookingStatus" name="bookingStatus" class="form-control" required>
                     <option value="BOOKED" ${busJourney.getBookingStatus() == 'BOOKED' ? 'selected' : ''}>BOOKED</option>
@@ -100,7 +100,7 @@
                     <option value="ACTIVE" ${busJourney.getActivationStatus() == 'ACTIVE' ? 'selected' : ''}>ACTIVE</option>
                     <option value="INACTIVE" ${busJourney.getActivationStatus() == 'INACTIVE' ? 'selected' : ''}>INACTIVE</option>
                 </select>
-            </div> --%>
+            </div>
             <div class="btn-container">
                 <button type="submit" class="btn">Update</button>
             </div>
