@@ -26,7 +26,7 @@ import com.travel.staff.repository.UserRepository;
 import com.travel.staff.service.RegistrationStaffService;
 
 @Controller
-@RequestMapping("/staff")
+
 public class RegistrationStaffController {
     
     @Autowired

@@ -1,10 +1,9 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" isELIgnored="false"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
-
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-
+	<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
+<%-- <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %> --%>
+<%-- <%@ page isELIgnored="false" %>  --%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -93,23 +92,76 @@
         </ul>
     </div>
      -->
+     
+     
+     
+    
+     
+     
     <div class="box-container">
-        <a class="box box-1" href="/bus-journey/show_bus_journeys">
-           SHOW ALL BUS JOURNEYS
-        </a>
-        <a class="box box-2" href="/bus-journey/create-bus_journey">
-            CREATE BUS JOURNEY
-        </a>
-        <a class="box box-3" href="/bus-journey/search_bus_journey">
-            SHOW AVAILABLE BUSES 
-        </a>
-        <a class="box box-4" href="/bus-journey/search">
-            SEARCH
-        </a>
+    
+    
+    
+	<%-- <p>
+		User: <security:authentication property="principal.username" />
+		<br><br>
+		Role(s): <security:authentication property="principal.authorities" />
+	</p>
+	
+         --%>
+        
+     
+       <security:authorize access="hasAuthority('ADMIN')">
+          <a class="box box-2" href="${pageContext.request.contextPath}/bus-journey/show_bus_journeys">
+             UPDATE ALL BUS JOURNEYS
+           </a>
+            
+            <a class="box box-4" href="${pageContext.request.contextPath}/bus-journey/search">
+                 SEARCH
+            </a>
+            
+             <a class="box box-1" href="${pageContext.request.contextPath}/bus-journey/create-bus_journey">
+                CREATE BUS JOURNEY
+             </a>
+      </security:authorize>
+   
+      
+       <security:authorize access="hasAuthority('CUSTOMER')">
+            <a class="box box-4" href="${pageContext.request.contextPath}/bus-journey/search">
+                 SEARCH
+            </a>
+            
+          
+      </security:authorize>
+      
+       <security:authorize access="hasAuthority('STAFF')">
+          
+            
+            <a class="box box-4" href="${pageContext.request.contextPath}/bus-journey/search">
+                 SEARCH
+            </a>
+            
+             <a class="box box-2" href="${pageContext.request.contextPath}/bus-journey/create-bus_journey">
+                CREATE BUS JOURNEY
+             </a>
+      </security:authorize>
+   
+      
+	<security:authorize access="isAuthenticated()">
+    Welcome Back, <security:authentication property="name"/>
+</security:authorize>
+        
+        <%-- <security:authentication property="principal.authorities"/>  --%>
     
     </div>
-    
-    
    
+   
+   
+   
+   
+    
+    <!-- <a class="box box-3" href="/bus-journey/search_bus_journey">
+            SHOW AVAILABLE BUSES 
+        </a> -->
 </body>
 </html>

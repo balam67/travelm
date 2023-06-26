@@ -4,7 +4,9 @@ import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+//import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,11 +15,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.travel.bus_journey.entity.BusJourney;
 import com.travel.bus_journey.entity.BusSearchForm;
 import com.travel.bus_journey.service.BusJourneyService;
-import org.springframework.security.core.Authentication;
+//import org.springframework.security.core.Authentication;
 @Controller
 @RequestMapping("/bus-journey")
 public class BusJourneyController implements org.springframework.boot.web.servlet.error.ErrorController {
@@ -30,17 +33,13 @@ public class BusJourneyController implements org.springframework.boot.web.servle
         this.busJourneyService = busJourneyService;
     }
 
-    @RequestMapping("/error")
-    public String handleError() {
-        // Handle the error logic here
-        // You can display a custom error page or redirect to a specific URL
-        return "error";
-    }
-
-    public String getErrorPath() {
-        return "/error";
-    }
-   
+	/*
+	 * @RequestMapping("/error") public String handleError() { // Handle the error
+	 * logic here // You can display a custom error page or redirect to a specific
+	 * URL return "error"; }
+	 * 
+	 * public String getErrorPath() { return "/error"; }
+	 */
 
     
     @GetMapping("/show_bus_journeys")
@@ -59,8 +58,9 @@ public class BusJourneyController implements org.springframework.boot.web.servle
     public String getBusJourneysHomePage(Model model) {
     	 model.addAttribute("busJourney", new BusJourney());
     	
-        return "show_bus_journeys_home_page";
-    }
+       return "show_bus_journeys_home_page";
+    	// return "a";
+    	 }
 
     
     //customer related bus
@@ -94,19 +94,18 @@ public class BusJourneyController implements org.springframework.boot.web.servle
     @GetMapping("/bookTicket")
     public String getUnassignedBusJourneys(@RequestParam("id") Long id) {
     	
-    	Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-       String  username = authentication.getName();
-       
-    	System.out.println("Bus Id:  "+id);
-    	   System.out.println("Logged-in user: " + username);
-    	
-       BusJourney busBusIdBus = busJourneyService.getBusBusId(id);
-       
-       busBusIdBus.setUsername(username);
-       busBusIdBus.setId(id);
-       System.out.println("Updated Details "+busBusIdBus.toString());
-       busJourneyService.saveBusJourneyByCustomer(busBusIdBus);
-      
+		
+		  Authentication authentication = SecurityContextHolder.getContext().getAuthentication(); 
+		  String username = authentication.getName();
+		  
+		  System.out.println("Bus Id:  "+id); System.out.println("Logged-in user: " + username);
+		  
+		  BusJourney busBusIdBus = busJourneyService.getBusBusId(id);
+		  
+		  busBusIdBus.setUsername(username); busBusIdBus.setId(id);
+		  System.out.println("Updated Details "+busBusIdBus.toString());
+		  busJourneyService.saveBusJourneyByCustomer(busBusIdBus);
+		 
          return "redirect:/bus-journey/search";
          
     }

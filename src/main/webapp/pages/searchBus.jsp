@@ -166,5 +166,10 @@
             // Additional configuration options for Flatpickr
         });
     </script>
+    
+    <div>
+        <a href="/bus-journey/show_bus_journeys_homepage" class="login-btn">BUS JOURNEY HOME</a>
+      
+    </div>
 </body>
 </html>
